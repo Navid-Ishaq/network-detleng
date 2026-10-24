@@ -73,15 +73,6 @@
  $('dismissWelcome').addEventListener('click',()=>{$('welcome').hidden=true;try{sessionStorage.setItem('network-welcome-dismissed','1');}catch{}$('showWelcome').focus({preventScroll:true});});
  try{$('welcome').hidden=sessionStorage.getItem('network-welcome-dismissed')==='1';}catch{}
  $('showWelcome').addEventListener('click',()=>{$('welcome').hidden=false;try{sessionStorage.removeItem('network-welcome-dismissed');}catch{}$('welcomeHeading').setAttribute('tabindex','-1');$('welcomeHeading').focus();});
- const tabs=[$('loginTab'),$('createTab')];
- function accountTab(index){
-  tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;});
-  $('accountPanel').setAttribute('aria-labelledby',tabs[index].id);
-  const fields=index?['Username','Email','Password','Confirm Password']:['Email','Password'];
-  $('accountPanel').innerHTML=fields.map(label=>`<label>${label}<input disabled type="${label.includes('Password')?'password':label==='Email'?'email':'text'}" placeholder="Available when accounts launch"></label>`).join('')+'<label><input type="checkbox" disabled> Show Password</label>'+`<button class="button" disabled>${index?'Create Account':'Sign In'}</button>`;
- }
- tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>accountTab(index));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-index;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();accountTab(next);tabs[next].focus();});});
- [$('loginButton'),$('footerLogin')].forEach(b=>b.addEventListener('click',()=>{closeMenu();accountTab(0);openDialog($('accountDialog'));}));accountTab(0);
  function closeMenu(){ $('headerActions').classList.remove('open');$('menuButton').setAttribute('aria-expanded','false'); }
  $('menuButton').addEventListener('click',()=>{const open=$('headerActions').classList.toggle('open');$('menuButton').setAttribute('aria-expanded',String(open));});
  $('headerActions').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
@@ -90,3 +81,4 @@
  const headerObserver=new ResizeObserver(()=>document.documentElement.style.setProperty('--header',document.querySelector('.header').getBoundingClientRect().height+'px'));headerObserver.observe(document.querySelector('.header'));
  $('year').textContent=new Date().getFullYear();
 })();
+

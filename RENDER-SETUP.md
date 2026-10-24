@@ -2,7 +2,7 @@
 
 ## What is ready
 
-The repository now contains a Mastra agent, a Node/Express API and a consent-based chat panel. The directory is the knowledge source. The AI recommends up to three site IDs; the backend and browser resolve those IDs to approved directory URLs. Curated recommendations remain usable without online AI.
+The repository now contains a Mastra agent, a Node/Express API and a chat panel with an online-processing disclosure. The directory is the knowledge source. The AI recommends up to three site IDs; the backend and browser resolve those IDs to approved directory URLs. Curated recommendations remain usable without online AI.
 
 Mastra FRAMEWORK runs inside this Render service. No separate Mastra Platform project, Mastra API key, database, vector store or Supabase configuration is required. Do not connect the unrelated ExcelFlow AI Analyst project.
 
@@ -58,7 +58,7 @@ In config.js replace the blank apiBaseUrl with the EXACT actual Render URL (HTTP
 window.DETLENG_CONFIG = { apiBaseUrl: 'https://YOUR-ACTUAL-SERVICE.onrender.com' };
 ```
 
-Push that config.js change. Then open network.detleng.com, open Ask DeTLeng AI, tick the data-sharing permission and send a test question. Without a URL on GitHub Pages, the curated guide works and AI shows unavailable. Blank config automatically uses same origin on localhost and *.onrender.com.
+Push that config.js change. Then open network.detleng.com, open Ask DeTLeng AI, read Privacy details and send a test question. Without a URL on GitHub Pages, the curated guide works and AI shows unavailable. Blank config automatically uses same origin on localhost and *.onrender.com.
 
 ## 5. Acceptance checks after adding your key
 
@@ -68,12 +68,13 @@ Push that config.js change. Then open network.detleng.com, open Ask DeTLeng AI, 
 - Ask about Speaking n8n: roadmap, not completed lessons.
 - Ask for unknown capabilities: uncertainty + a requirements conversation.
 - Try a provider error or temporary service outage: curated guide remains usable.
-- Review desktop/mobile chat, consent, clear conversation, Escape/close and actual approved links.
+- Review desktop/mobile chat, privacy details, new conversation, Escape/close and actual approved links.
 
 ## Privacy and operational scope
 
-Question plus up to six recent messages are sent through Render to Groq only on explicit submission with consent. The application has no chat database or configured agent memory; page chat is held in browser memory. The service does not intentionally log prompt bodies. Render/Groq policies and platform logs still apply. Do not claim zero provider retention. The public endpoint has CORS and in-memory rate/concurrency limits; CORS is not authentication. For higher traffic use durable quota/abuse protection before scaling replicas.
+Question plus up to six recent messages are sent through Render to Groq only when the visitor sends a message. The application has no chat database or configured agent memory; page chat is held in browser memory. The service does not intentionally log prompt bodies. Render/Groq policies and platform logs still apply. Do not claim zero provider retention. The public endpoint has CORS and in-memory rate/concurrency limits; CORS is not authentication. For higher traffic use durable quota/abuse protection before scaling replicas.
 
 Seven automated API tests passed locally using stub model responses. Installed Mastra agent initialization and JS syntax checks passed. No real provider response, deployed Render service, frontend-to-provider round trip or visual browser check has yet been verified. Provider credentials were not available. Live verification follows deployment.
 
 Official references: https://render.com/docs/web-services · https://render.com/docs/node-version · https://mastra.ai/docs/agents/overview · https://mastra.ai/docs/agents/structured-output · https://mastra.ai/models/providers/groq
+
